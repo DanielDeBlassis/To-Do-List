@@ -24,3 +24,8 @@ $botonNuevaTarea.addEventListener("click", () => {
     $modalForm.classList.remove("hidden");
 });
 
+$botonCerrar.addEventListener("click", () => {
+    $modalForm.classList.add("hidden");
+    taskForm.reset();
+})
+
