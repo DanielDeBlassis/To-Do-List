@@ -62,6 +62,36 @@ window.addEventListener("DOMContentLoaded", async () => {
             $listaDeTareas.appendChild(tareaLi);
         });
 
+        const btnsDelete = $listaDeTareas.querySelectorAll(".btn-delete");
 
+        btnsDelete.forEach(btn => {
+            btn.addEventListener("click", (event) => {
+                swal({
+                    title: "¿Estás seguro de borrar esta tarea?",
+                    text: "(Una vez borrada, la tarea no podrá ser recuperada)",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Aceptar"],
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            try {
+                                deleteTask(event.target.dataset.id);
+                                $listaDeTareas.innerHTML = ``;
+                                swal("La tarea ha sido borrada con éxito!", {
+                                    icon: "success",
+                                });
+                            } catch (error) {
+                                swal("Error!", "Ocurrió un error! Vuelve a intentar.", {
+                                    icon: "error",
+                                });
+                                console.log(`Error: ${error}`);
+                            }
 
+                        } else {
+                            swal("Cancelado", "Se canceló el borrado.", "info");
+                        }
+                    });
+            })
+        })
 });
