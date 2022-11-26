@@ -11,3 +11,16 @@ const $modalForm = document.querySelector("#agregar-tarea-modal");
 
 let editStatus = false;
 let id = "";
+
+$botonAgregar.addEventListener("click", () => {
+    taskForm["btn-task-save"].innerText = "Agregar Tarea";
+    $tituloToDo.innerText = "Agrega una nueva Tarea";
+    $modalForm.classList.remove("hidden");
+});
+
+$botonNuevaTarea.addEventListener("click", () => {
+    taskForm["btn-task-save"].innerText = "Agregar Tarea";
+    $tituloToDo.innerText = "Agrega una nueva Tarea";
+    $modalForm.classList.remove("hidden");
+});
+
