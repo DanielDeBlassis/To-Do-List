@@ -94,4 +94,31 @@ window.addEventListener("DOMContentLoaded", async () => {
                     });
             })
         })
+
+        const btnsEdit = $listaDeTareas.querySelectorAll(".btn-edit");
+        btnsEdit.forEach(btn => {
+            btn.addEventListener("click", async (event) => {
+                $tituloToDo.innerText = "Editar Tarea";
+                taskForm["btn-task-save"].innerText = "Actualizar";
+                $modalForm.classList.remove("hidden");
+
+                const doc = await getTask(event.target.dataset.id);
+                const task = doc.data();
+
+                taskForm["task-title"].value = task.titulo;
+                taskForm["task-description"].value = task.descripcion;
+                taskForm["task-color-note"].value = task.colorNota;
+                taskForm["task-color-text"].value = task.colorTexto;
+
+                editStatus = true;
+                id = doc.id;
+
+            });
+        });
+
+    });
+
+
+});
+
 });
