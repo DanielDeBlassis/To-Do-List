@@ -10,3 +10,4 @@ const $botonCerrar = document.querySelector("#btn-cerrar-modal");
 const $modalForm = document.querySelector("#agregar-tarea-modal");
 
 let editStatus = false;
+let id = "";
