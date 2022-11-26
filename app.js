@@ -121,4 +121,50 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const title = taskForm["task-title"];
+    const description = taskForm["task-description"];
+    const colorNota = taskForm["task-color-note"];
+    const colorTexto = taskForm["task-color-text"];
+
+    if (editStatus === false) {
+        try {
+            saveTask(title.value, description.value, colorNota.value, colorTexto.value);
+            swal("Correcto!", "Tarea añadida con éxito.", "success")
+                .then(() => {
+                    $modalForm.classList.add("hidden");
+                    Toastify({
+                        text: "Tarea añadida",
+                        style: {
+                            background: "green"
+                        }
+                    }).showToast();
+                });
+        } catch (error) {
+            swal("Oops!", "Ocurrió un error. Vuelve a intentarlo.", "error")
+                .then(() => {
+                    Toastify({
+                        text: "Error al añadir tarea",
+                        style: {
+                            background: "red"
+                        }
+                    }).showToast();
+                })
+            console.log(`Ocurrió un error: ${error}`);
+        }
+    } else {
+        try {
+            $tituloToDo.innerText = "Editar Tarea";
+            updateTask(id, { titulo: title.value, descripcion: description.value });
+            taskForm["btn-task-save"].innerText = "Guardar"
+            editStatus = false;
+            $modalForm.classList.add("hidden");
+        } catch (error) {
+            console.log(`Ocurrió un error: ${error}`);
+        }
+    }
+
+    taskForm.reset();
 });
